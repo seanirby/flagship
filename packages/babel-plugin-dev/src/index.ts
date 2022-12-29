@@ -6,7 +6,7 @@ export default (api: any) => {
   } = api;
 
   const isRootComponent = (path: any) => {
-    return path.parent.type !== "JSXElement" && path.node.openingElement.name.name !== "DevMenuWrapper";
+    return path.parent.type !== "JSXElement" && path.node.openingElement.name.name !== "Dev";
   };
 
   const isScreenComponent = (state: any) => {
@@ -24,9 +24,9 @@ export default (api: any) => {
     visitor: {
       Program(path: any, state: any) {
         if (isScreenComponent(state)) {
-          const identifier = t.identifier("DevMenuWrapper");
-          const importSpecifier = t.importSpecifier(identifier, identifier);
-          const importDeclaration = t.importDeclaration([importSpecifier], t.stringLiteral("fsdev"));
+          const identifier = t.identifier("Dev");
+          const importSpecifier = t.importDefaultSpecifier(identifier);
+          const importDeclaration = t.importDeclaration([importSpecifier], t.stringLiteral("@brandingbrand/kernel-component-dev"));
 
           path.unshiftContainer("body", importDeclaration);
 
@@ -47,7 +47,7 @@ export default (api: any) => {
           const projectDevMenusExpression = t.jsxExpressionContainer(!!state.opts.projectDevMenusDirectory ? t.identifier('ProjectDevMenus') : t.arrayExpression());
           const projectDevMenusAttribute = t.jsxAttribute(projectDevMenusIdentifier, projectDevMenusExpression);
 
-          path.replaceWith(t.jsxElement(t.jsxOpeningElement(t.jsxIdentifier("DevMenuWrapper"), [versionAttribute, projectDevMenusAttribute]), t.jsxClosingElement(t.jsxIdentifier("DevMenuWrapper")), [path.node]));
+          path.replaceWith(t.jsxElement(t.jsxOpeningElement(t.jsxIdentifier("Dev"), [versionAttribute, projectDevMenusAttribute]), t.jsxClosingElement(t.jsxIdentifier("Dev")), [path.node]));
         }
       }
     }
