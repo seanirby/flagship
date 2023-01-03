@@ -1,4 +1,4 @@
-import  PathModule from 'path';
+import { join } from 'path';
 
 export default (api: any) => {
   const {
@@ -10,11 +10,11 @@ export default (api: any) => {
   };
 
   const isScreenComponent = (state: any) => {
-    const screensDir = PathModule.join(state.opts.project, state.opts.screensDirectory);
+    const screensDir = join(state.opts.project, state.opts.screens);
 
-    if (!!state.opts.projectDevMenusDirectory) {
-      const projectDevMenusDir = PathModule.join(state.opts.project, state.opts.screensDirectory, state.opts.projectDevMenusDirectory);
-      return state.filename.includes(screensDir) && !state.filename.includes(projectDevMenusDir);
+    if (!!state.opts.devScreens) {
+      const devScreensDir = join(state.opts.project, state.opts.screens, state.opts.devScreens);
+      return state.filename.includes(screensDir) && !state.filename.includes(devScreensDir);
     } else {
       return state.filename.includes(screensDir)
     }
@@ -30,11 +30,11 @@ export default (api: any) => {
 
           path.unshiftContainer("body", importDeclaration);
 
-          if (!!state.opts.projectDevMenusDirectory) {
-            const projectDevMenusIdentifier = t.identifier('ProjectDevMenus');
-            const projectDevMenusSpecifier = t.importDefaultSpecifier(projectDevMenusIdentifier);
-            const projectDevMenusImportDeclaration = t.importDeclaration([projectDevMenusSpecifier], t.stringLiteral(`./${state.opts.projectDevMenusDirectory}`));
-            path.unshiftContainer("body", projectDevMenusImportDeclaration);
+          if (!!state.opts.devScreens) {
+            const DevScreensIdentifier = t.identifier('DevScreens');
+            const DevScreensSpecifier = t.importDefaultSpecifier(DevScreensIdentifier);
+            const DevScreensImportDeclaration = t.importDeclaration([DevScreensSpecifier], t.stringLiteral(`./${state.opts.devScreens}`));
+            path.unshiftContainer("body", DevScreensImportDeclaration);
           }
         }
       },
@@ -44,7 +44,7 @@ export default (api: any) => {
           const versionAttribute = t.jsxAttribute(versionIdentifier, t.stringLiteral(state.opts.version ?? ''));
 
           const projectDevMenusIdentifier = t.jsxIdentifier("projectDevMenus");
-          const projectDevMenusExpression = t.jsxExpressionContainer(!!state.opts.projectDevMenusDirectory ? t.identifier('ProjectDevMenus') : t.arrayExpression());
+          const projectDevMenusExpression = t.jsxExpressionContainer(!!state.opts.devScreens ? t.identifier('DevScreens') : t.arrayExpression());
           const projectDevMenusAttribute = t.jsxAttribute(projectDevMenusIdentifier, projectDevMenusExpression);
 
           path.replaceWith(t.jsxElement(t.jsxOpeningElement(t.jsxIdentifier("Dev"), [versionAttribute, projectDevMenusAttribute]), t.jsxClosingElement(t.jsxIdentifier("Dev")), [path.node]));

@@ -101,11 +101,6 @@
     "singleQuote": true,
     "trailingComma": "all"
   },
-  "babel": {
-    "presets": [
-      "module:metro-react-native-babel-preset"
-    ]
-  },
   "workspaces": {
     "nohoist": [
       "**"
