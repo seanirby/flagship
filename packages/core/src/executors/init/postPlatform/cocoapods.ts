@@ -10,7 +10,7 @@ export const execute = (options: any, config: any) => ({
     logger.logInfo("running pod install");
 
     try {
-      await exec.async(`cd "${path.project.resolve("ios")}" && pod install`);
+      await exec.async(`cd "${path.project.resolve("ios")}" && pod install --verbose`);
     } catch {
       logger.logError(
         "pod install failed, here are the few things you can try to fix:\n" +

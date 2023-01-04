@@ -30,6 +30,7 @@
     "@brandingbrand/kernel-babel-plugin-dev": "0.0.1",
     "@brandingbrand/kernel-cli": "*",
     "@brandingbrand/kernel-component-dev": "*",
+    "@brandingbrand/kernel-component-env": "*",
     "@brandingbrand/kernel-plugin-app-icon": "*",
     "@brandingbrand/kernel-plugin-asset": "*",
     "@brandingbrand/kernel-plugin-native-navigation": "*",
