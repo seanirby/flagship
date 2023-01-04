@@ -1,7 +1,8 @@
 {
   "name": "@brandingbrand/kernel-component-env",
   "version": "0.0.1",
-  "description": "",
+  "description": "Project environment persistence and switching",
+  "homepage": "https://github.com/brandingbrand",
   "publishConfig": {
     "access": "public"
   },
